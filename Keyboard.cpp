@@ -43,10 +43,24 @@ using namespace std;
 #define ll long long
 #define ld long double
 vector<vector<pair<int, int>>> v(27);
+ll fastpow(ll b, ll p)
+{
+    if (!p)
+        return 1;
+    ll ret = fastpow(b, p >> 1);
+    ret *= ret;
+    if (p & 1)
+        ret *= b;
+    return ret;
+}
+ll dist(int x1, int x2, int y1, int y2)
+{
+    return fastpow(x1 - x2, 2) + fastpow(y1 - y2, 2);
+}
 int main()
 {
-    int n, m, k;
-    cin >> n >> m >> k;
+    int n, m, b;
+    cin >> n >> m >> b;
     char c;
     for (int i = 0; i < n; i++)
     {
@@ -57,6 +71,21 @@ int main()
                 v[c - 'a'].push_back({i, j});
             else
                 v[26].push_back({i, j});
+        }
+    }
+    vector<bool> possible(26);
+    for (int i = 0; i < 26; i++)
+    {
+        for (int k = 0; k < v[i].size(); k++)
+        {
+            for (int l = 0; l < v[26].size(); l++)
+            {
+                if (dist(v[26][l].first, v[i][k].first, v[26][l].second, v[i][k].second) <= b*b)
+                {
+                    possible[i] = 1;
+                    break;
+                }
+            }
         }
     }
     int q;
@@ -70,20 +99,26 @@ int main()
             if (v[26].size() == 0)
             {
                 cout << "-1";
-                break;
+                // system("pause");
+                return 0;
             }
-            for (int i = 0; i < v[c - 'A'].size(); i++)
-            {
-            }
-        }
-        else
-        {
-            if (v[c - 'a'].size() == 0)
+
+            if (v[c - 'A'].size() == 0)
             {
                 cout << "-1";
-                break;
+                // system("pause");
+                return 0;
             }
+            if (!possible[c - 'A'])
+                steps++;
+        }
+        else if (v[c - 'a'].size() == 0)
+        {
+            cout << "-1";
+            // system("pause");
+            return 0;
         }
     }
-    system("pause");
+    cout << steps;
+    // system("pause");
 }

@@ -43,26 +43,20 @@ using namespace std;
 #define ll long long
 #define ld long double
 
-int main()
+int getMoneySpent(vector<int> k, vector<int> d, int b)
 {
-    int n;
-    cin >> n;
-    vector<char> s(n);
-    int a = 0, d = 0;
+    int n = k.size();
+    int m = d.size();
+
+    vector<int> p(k.size(), -1);
+
     for (int i = 0; i < n; i++)
     {
-        cin >> s[i];
-        if (s[i] == 'A')
-            a++;
-        else
-            d++;
+        for (int j = 0; j < m; j++)
+        {
+            if (k[i] + d[j] <= b)
+                p[i] = max(p[i], k[i] + d[j]);
+        }
     }
-    if (a > d)
-        cout << "Anton";
-    else if (a < d)
-        cout << "Danik";
-    else
-        cout << "Friendship";
-
-    //system("pause");
+    return *max_element(p.begin(), p.end());
 }

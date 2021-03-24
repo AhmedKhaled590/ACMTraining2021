@@ -43,26 +43,14 @@ using namespace std;
 #define ll long long
 #define ld long double
 
-int main()
+string catAndMouse(int x, int y, int z)
 {
-    int n;
-    cin >> n;
-    vector<char> s(n);
-    int a = 0, d = 0;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> s[i];
-        if (s[i] == 'A')
-            a++;
-        else
-            d++;
-    }
-    if (a > d)
-        cout << "Anton";
-    else if (a < d)
-        cout << "Danik";
+    int disA = abs(x - z);
+    int disB = abs(y - z);
+    if (disA < disB)
+        return "Cat A";
+    else if (disB < disA)
+        return "Cat B";
     else
-        cout << "Friendship";
-
-    //system("pause");
+        return "Mouse C";
 }

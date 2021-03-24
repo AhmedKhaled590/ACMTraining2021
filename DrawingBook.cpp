@@ -43,26 +43,42 @@ using namespace std;
 #define ll long long
 #define ld long double
 
+/*
+ * Complete the pageCount function below.
+ */
+int pageCount(int n, int p)
+{
+    int front = -1, back = -1;
+    if (n % 2 != 0)
+    {
+        front = floor(p / 2.0);
+        back = floor((n - p) / 2.0);
+    }
+    else
+    {
+        front = floor(p / 2.0);
+        back = ceil((n - p) / 2.0);
+    }
+    return min(front, back);
+}
+
 int main()
 {
+    ofstream fout(getenv("OUTPUT_PATH"));
+
     int n;
     cin >> n;
-    vector<char> s(n);
-    int a = 0, d = 0;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> s[i];
-        if (s[i] == 'A')
-            a++;
-        else
-            d++;
-    }
-    if (a > d)
-        cout << "Anton";
-    else if (a < d)
-        cout << "Danik";
-    else
-        cout << "Friendship";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    //system("pause");
+    int p;
+    cin >> p;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    int result = pageCount(n, p);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
 }
