@@ -4,6 +4,7 @@
         "cmath": "cpp",
         "utility": "cpp",
         "ostream": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "valarray": "cpp"
     }
 }
